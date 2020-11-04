@@ -59,7 +59,7 @@
         <scene sceneID="ZGg-9a-rj6">
             <objects>
                 <tableViewController id="Drw-ca-xZv" customClass="NoteListTableViewController" customModule="LifeTravel" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="2yd-IC-RhP">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="2yd-IC-RhP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
@@ -82,7 +82,7 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5v-gp-Poc">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5v-gp-Poc">
                                             <rect key="frame" x="31" y="78.333333333333329" width="281" height="74.999999999999986"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="75" id="aHO-Fn-80P"/>
@@ -109,7 +109,6 @@
                                     <outlet property="noteContent" destination="c5v-gp-Poc" id="Wli-d9-tEG"/>
                                     <outlet property="noteDate" destination="Kyb-5A-B6r" id="TmU-M8-jTa"/>
                                     <outlet property="noteLocation" destination="fTp-2D-qhl" id="v99-mm-WIw"/>
-                                    <segue destination="kLg-vt-lDz" kind="showDetail" id="NFL-Xt-8Vr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -119,25 +118,75 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="NoteList" image="tray" catalog="system" id="31B-e1-x9D"/>
+                    <connections>
+                        <segue destination="kLg-vt-lDz" kind="showDetail" identifier="showDetailSegue" id="CeA-qB-4xB"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pi3-fH-bLu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-111.2" y="-890.39408866995075"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="Kl2-8O-GMI">
             <objects>
-                <viewController id="kLg-vt-lDz" sceneMemberID="viewController">
+                <viewController id="kLg-vt-lDz" customClass="DetailViewController" customModule="LifeTravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jDM-0K-siB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WqO-FV-L7b">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="iq4-vN-BUv"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtN-Rv-xEp">
+                                <rect key="frame" x="16" y="258" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHo-Lu-Pbx">
+                                <rect key="frame" x="16" y="283" width="343" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfx-Lc-sOk">
+                                <rect key="frame" x="16" y="317" width="343" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="HIW-gO-gu3" firstAttribute="trailing" secondItem="iHo-Lu-Pbx" secondAttribute="trailing" constant="16" id="9Mn-FC-qwu"/>
+                            <constraint firstItem="dtN-Rv-xEp" firstAttribute="top" secondItem="WqO-FV-L7b" secondAttribute="bottom" constant="8" id="CIO-m1-XrV"/>
+                            <constraint firstItem="WqO-FV-L7b" firstAttribute="top" secondItem="jDM-0K-siB" secondAttribute="top" id="CPX-hc-4Tu"/>
+                            <constraint firstItem="qfx-Lc-sOk" firstAttribute="top" secondItem="iHo-Lu-Pbx" secondAttribute="bottom" constant="4" id="OqP-1j-UqW"/>
+                            <constraint firstItem="iHo-Lu-Pbx" firstAttribute="leading" secondItem="HIW-gO-gu3" secondAttribute="leading" constant="16" id="VBs-KQ-Jyp"/>
+                            <constraint firstItem="HIW-gO-gu3" firstAttribute="trailing" secondItem="qfx-Lc-sOk" secondAttribute="trailing" constant="16" id="VjG-mw-N7y"/>
+                            <constraint firstItem="WqO-FV-L7b" firstAttribute="leading" secondItem="HIW-gO-gu3" secondAttribute="leading" id="XJ5-QV-vd9"/>
+                            <constraint firstItem="iHo-Lu-Pbx" firstAttribute="top" secondItem="dtN-Rv-xEp" secondAttribute="bottom" constant="4" id="YFe-Y9-ZkS"/>
+                            <constraint firstItem="dtN-Rv-xEp" firstAttribute="leading" secondItem="HIW-gO-gu3" secondAttribute="leading" constant="16" id="bi5-bJ-zKj"/>
+                            <constraint firstItem="HIW-gO-gu3" firstAttribute="trailing" secondItem="dtN-Rv-xEp" secondAttribute="trailing" constant="16" id="chJ-fA-R4g"/>
+                            <constraint firstItem="qfx-Lc-sOk" firstAttribute="leading" secondItem="HIW-gO-gu3" secondAttribute="leading" constant="16" id="uhY-5L-ITW"/>
+                            <constraint firstItem="HIW-gO-gu3" firstAttribute="trailing" secondItem="WqO-FV-L7b" secondAttribute="trailing" id="uuZ-Gy-xes"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HIW-gO-gu3"/>
                     </view>
+                    <navigationItem key="navigationItem" id="X8Y-AK-4Y1"/>
+                    <connections>
+                        <outlet property="detailContent" destination="qfx-Lc-sOk" id="mzj-gI-Inz"/>
+                        <outlet property="detailDate" destination="iHo-Lu-Pbx" id="IlL-jm-d7E"/>
+                        <outlet property="detailImage" destination="WqO-FV-L7b" id="7T4-pj-IaY"/>
+                        <outlet property="detailLocation" destination="dtN-Rv-xEp" id="XuJ-D1-jl7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hk2-tS-9AU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="810" y="-890"/>
+            <point key="canvasLocation" x="808.79999999999995" y="-890.39408866995075"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gDw-0c-Ut6">

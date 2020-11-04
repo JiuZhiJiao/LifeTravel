@@ -8,13 +8,29 @@
 
 import UIKit
 
-class NoteListTableViewController: UITableViewController {
+class NoteListTableViewController: UITableViewController, DatabaseListener {
     
     let CELL = "noteCell"
+    var notes: [Note] = []
+    var selectedNote: Note?
+    weak var databaseController: DatabaseProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // database
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
     }
 
     // MARK: - Table view data source
@@ -24,36 +40,33 @@ class NoteListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return notes.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CELL, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL, for: indexPath) as! NoteListTableViewCell
 
-        // Configure the cell...
+        let note = notes[indexPath.row]
+        cell.noteDate.text = note.date
+        cell.noteLocation.text = note.location
+        cell.noteContent.text = note.content
 
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedNote = notes[indexPath.row]
+        
+        // show detail of the note
+        self.performSegue(withIdentifier: "showDetailSegue", sender: indexPath)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            self.databaseController?.deleteNote(note: notes[indexPath.row])
+        }
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -70,14 +83,19 @@ class NoteListTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "showDetailSegue" {
+            let destination = segue.destination as! DetailViewController
+            destination.note = selectedNote
+        }
     }
-    */
+    
+    // MARK: - Database Listener Functions
+    func onNoteListChange(change: DatabaseChange, notes: [Note]) {
+        self.notes = notes
+        print(notes.count)
+        tableView.reloadData()
+    }
 
 }

@@ -14,6 +14,13 @@
 		B41B0950255277A8007BA3BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B41B094E255277A8007BA3BC /* LaunchScreen.storyboard */; };
 		B41B095825527FD7007BA3BC /* NoteListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */; };
 		B41B095A2552800F007BA3BC /* NoteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */; };
+		B41B095E2552850D007BA3BC /* LifeTravelData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B41B095C2552850D007BA3BC /* LifeTravelData.xcdatamodeld */; };
+		B41B096125528600007BA3BC /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B095F25528600007BA3BC /* Note+CoreDataClass.swift */; };
+		B41B096225528600007BA3BC /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B096025528600007BA3BC /* Note+CoreDataProperties.swift */; };
+		B41B096525528656007BA3BC /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B096425528656007BA3BC /* DatabaseProtocol.swift */; };
+		B41B09682552882F007BA3BC /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B09672552882F007BA3BC /* MulticastDelegate.swift */; };
+		B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F502552905B00E10847 /* CoreDataController.swift */; };
+		B4A57F532552A0A600E10847 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F522552A0A600E10847 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +33,13 @@
 		B41B0951255277A8007BA3BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListTableViewController.swift; sourceTree = "<group>"; };
 		B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListTableViewCell.swift; sourceTree = "<group>"; };
+		B41B095D2552850D007BA3BC /* LifeTravelData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LifeTravelData.xcdatamodel; sourceTree = "<group>"; };
+		B41B095F25528600007BA3BC /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B41B096025528600007BA3BC /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B41B096425528656007BA3BC /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
+		B41B09672552882F007BA3BC /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		B4A57F502552905B00E10847 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		B4A57F522552A0A600E10847 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +56,8 @@
 		B41B0937255277A6007BA3BC = {
 			isa = PBXGroup;
 			children = (
+				B41B096325528629007BA3BC /* Database */,
+				B41B095B255284BE007BA3BC /* DataModel */,
 				B41B0942255277A6007BA3BC /* LifeTravel */,
 				B41B0941255277A6007BA3BC /* Products */,
 			);
@@ -61,6 +77,7 @@
 				B41B0943255277A6007BA3BC /* AppDelegate.swift */,
 				B41B0945255277A6007BA3BC /* SceneDelegate.swift */,
 				B41B0949255277A7007BA3BC /* Main.storyboard */,
+				B4A57F522552A0A600E10847 /* DetailViewController.swift */,
 				B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */,
 				B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */,
 				B41B094C255277A8007BA3BC /* Assets.xcassets */,
@@ -68,6 +85,26 @@
 				B41B0951255277A8007BA3BC /* Info.plist */,
 			);
 			path = LifeTravel;
+			sourceTree = "<group>";
+		};
+		B41B095B255284BE007BA3BC /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				B41B095F25528600007BA3BC /* Note+CoreDataClass.swift */,
+				B41B096025528600007BA3BC /* Note+CoreDataProperties.swift */,
+				B41B095C2552850D007BA3BC /* LifeTravelData.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		B41B096325528629007BA3BC /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				B41B096425528656007BA3BC /* DatabaseProtocol.swift */,
+				B41B09672552882F007BA3BC /* MulticastDelegate.swift */,
+				B4A57F502552905B00E10847 /* CoreDataController.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,10 +178,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4A57F532552A0A600E10847 /* DetailViewController.swift in Sources */,
+				B41B096525528656007BA3BC /* DatabaseProtocol.swift in Sources */,
 				B41B095825527FD7007BA3BC /* NoteListTableViewController.swift in Sources */,
+				B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */,
+				B41B096225528600007BA3BC /* Note+CoreDataProperties.swift in Sources */,
 				B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */,
+				B41B095E2552850D007BA3BC /* LifeTravelData.xcdatamodeld in Sources */,
+				B41B096125528600007BA3BC /* Note+CoreDataClass.swift in Sources */,
 				B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */,
 				B41B095A2552800F007BA3BC /* NoteListTableViewCell.swift in Sources */,
+				B41B09682552882F007BA3BC /* MulticastDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +386,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B41B095C2552850D007BA3BC /* LifeTravelData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B41B095D2552850D007BA3BC /* LifeTravelData.xcdatamodel */,
+			);
+			currentVersion = B41B095D2552850D007BA3BC /* LifeTravelData.xcdatamodel */;
+			path = LifeTravelData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B41B0938255277A6007BA3BC /* Project object */;
 }
