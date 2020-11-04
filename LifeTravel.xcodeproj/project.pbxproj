@@ -22,6 +22,8 @@
 		B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F502552905B00E10847 /* CoreDataController.swift */; };
 		B4A57F532552A0A600E10847 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F522552A0A600E10847 /* DetailViewController.swift */; };
 		B4A57F572552CCFC00E10847 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F562552CCFC00E10847 /* TabBarViewController.swift */; };
+		B4A57F592552D4D700E10847 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F582552D4D700E10847 /* MapViewController.swift */; };
+		B4A57F5B2552D4F400E10847 /* LocationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F5A2552D4F400E10847 /* LocationAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,12 @@
 		B4A57F502552905B00E10847 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		B4A57F522552A0A600E10847 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B4A57F562552CCFC00E10847 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		B4A57F582552D4D700E10847 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		B4A57F5A2552D4F400E10847 /* LocationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotation.swift; sourceTree = "<group>"; };
+		B4A57F612552E6C000E10847 /* A3-KoornangPark.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "A3-KoornangPark.gpx"; sourceTree = "<group>"; };
+		B4A57F622552E6C000E10847 /* A3-WoornackRd.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "A3-WoornackRd.gpx"; sourceTree = "<group>"; };
+		B4A57F632552E6C000E10847 /* A3-StateLibrary.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "A3-StateLibrary.gpx"; sourceTree = "<group>"; };
+		B4A57F642552E6C000E10847 /* A3-Home.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "A3-Home.gpx"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +66,7 @@
 		B41B0937255277A6007BA3BC = {
 			isa = PBXGroup;
 			children = (
+				B4A57F5C2552E69D00E10847 /* GPXFile */,
 				B41B096325528629007BA3BC /* Database */,
 				B41B095B255284BE007BA3BC /* DataModel */,
 				B41B0942255277A6007BA3BC /* LifeTravel */,
@@ -78,11 +87,13 @@
 			children = (
 				B41B0943255277A6007BA3BC /* AppDelegate.swift */,
 				B41B0945255277A6007BA3BC /* SceneDelegate.swift */,
-				B41B0949255277A7007BA3BC /* Main.storyboard */,
 				B4A57F562552CCFC00E10847 /* TabBarViewController.swift */,
-				B4A57F522552A0A600E10847 /* DetailViewController.swift */,
+				B41B0949255277A7007BA3BC /* Main.storyboard */,
 				B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */,
 				B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */,
+				B4A57F5A2552D4F400E10847 /* LocationAnnotation.swift */,
+				B4A57F582552D4D700E10847 /* MapViewController.swift */,
+				B4A57F522552A0A600E10847 /* DetailViewController.swift */,
 				B41B094C255277A8007BA3BC /* Assets.xcassets */,
 				B41B094E255277A8007BA3BC /* LaunchScreen.storyboard */,
 				B41B0951255277A8007BA3BC /* Info.plist */,
@@ -108,6 +119,17 @@
 				B4A57F502552905B00E10847 /* CoreDataController.swift */,
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		B4A57F5C2552E69D00E10847 /* GPXFile */ = {
+			isa = PBXGroup;
+			children = (
+				B4A57F642552E6C000E10847 /* A3-Home.gpx */,
+				B4A57F612552E6C000E10847 /* A3-KoornangPark.gpx */,
+				B4A57F622552E6C000E10847 /* A3-WoornackRd.gpx */,
+				B4A57F632552E6C000E10847 /* A3-StateLibrary.gpx */,
+			);
+			path = GPXFile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,10 +209,12 @@
 				B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */,
 				B4A57F572552CCFC00E10847 /* TabBarViewController.swift in Sources */,
 				B41B096225528600007BA3BC /* Note+CoreDataProperties.swift in Sources */,
+				B4A57F592552D4D700E10847 /* MapViewController.swift in Sources */,
 				B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */,
 				B41B095E2552850D007BA3BC /* LifeTravelData.xcdatamodeld in Sources */,
 				B41B096125528600007BA3BC /* Note+CoreDataClass.swift in Sources */,
 				B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */,
+				B4A57F5B2552D4F400E10847 /* LocationAnnotation.swift in Sources */,
 				B41B095A2552800F007BA3BC /* NoteListTableViewCell.swift in Sources */,
 				B41B09682552882F007BA3BC /* MulticastDelegate.swift in Sources */,
 			);

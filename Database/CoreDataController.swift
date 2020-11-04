@@ -48,7 +48,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
             let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
             
             // Sort by date
-            let dateSortDescriptor = NSSortDescriptor(key: "date", ascending: true)
+            let dateSortDescriptor = NSSortDescriptor(key: "date", ascending: false)
             fetchRequest.sortDescriptors = [dateSortDescriptor]
             
             // fetch all notes
@@ -123,6 +123,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         let _ = addNote(date: "2020-09-22", location: "Koornang Park", lat: -37.894788, long: 145.054450, content: "Here is the content on the Koornang Park, and here is more information about this, good park.")
         let _ = addNote(date: "2020-09-28", location: "Woolworths Carnegie", lat: -37.887559, long: 145.056396, content: "Here is the content on the Woolworths Carnegie, and here is more information about this, nice shopping center.")
         let _ = addNote(date: "2020-10-11", location: "Bon Chicken & Beer", lat: -37.888330, long: 145.057039, content: "Here is the content on the Bon Chicken & Beer, and here is more information about this, lovely place.")
+        let _ = addNote(date: "2020-05-13", location: "State Library Victoria", lat: -37.809729, long: 144.965176, content: "Here is the content on the State Library Victoria, and here is more information about this, huge miracle.")
     }
     
     // save change to CoreData
