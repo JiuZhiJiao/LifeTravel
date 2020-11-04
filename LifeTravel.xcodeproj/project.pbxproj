@@ -21,6 +21,7 @@
 		B41B09682552882F007BA3BC /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B09672552882F007BA3BC /* MulticastDelegate.swift */; };
 		B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F502552905B00E10847 /* CoreDataController.swift */; };
 		B4A57F532552A0A600E10847 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F522552A0A600E10847 /* DetailViewController.swift */; };
+		B4A57F572552CCFC00E10847 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F562552CCFC00E10847 /* TabBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		B41B09672552882F007BA3BC /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
 		B4A57F502552905B00E10847 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		B4A57F522552A0A600E10847 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		B4A57F562552CCFC00E10847 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				B41B0943255277A6007BA3BC /* AppDelegate.swift */,
 				B41B0945255277A6007BA3BC /* SceneDelegate.swift */,
 				B41B0949255277A7007BA3BC /* Main.storyboard */,
+				B4A57F562552CCFC00E10847 /* TabBarViewController.swift */,
 				B4A57F522552A0A600E10847 /* DetailViewController.swift */,
 				B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */,
 				B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */,
@@ -182,6 +185,7 @@
 				B41B096525528656007BA3BC /* DatabaseProtocol.swift in Sources */,
 				B41B095825527FD7007BA3BC /* NoteListTableViewController.swift in Sources */,
 				B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */,
+				B4A57F572552CCFC00E10847 /* TabBarViewController.swift in Sources */,
 				B41B096225528600007BA3BC /* Note+CoreDataProperties.swift in Sources */,
 				B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */,
 				B41B095E2552850D007BA3BC /* LifeTravelData.xcdatamodeld in Sources */,
