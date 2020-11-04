@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B0943255277A6007BA3BC /* AppDelegate.swift */; };
 		B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B0945255277A6007BA3BC /* SceneDelegate.swift */; };
-		B41B0948255277A6007BA3BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B0947255277A6007BA3BC /* ViewController.swift */; };
 		B41B094B255277A7007BA3BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B41B0949255277A7007BA3BC /* Main.storyboard */; };
 		B41B094D255277A8007BA3BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B41B094C255277A8007BA3BC /* Assets.xcassets */; };
 		B41B0950255277A8007BA3BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B41B094E255277A8007BA3BC /* LaunchScreen.storyboard */; };
+		B41B095825527FD7007BA3BC /* NoteListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */; };
+		B41B095A2552800F007BA3BC /* NoteListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B41B0940255277A6007BA3BC /* LifeTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B41B0943255277A6007BA3BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B41B0945255277A6007BA3BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B41B0947255277A6007BA3BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B41B094A255277A7007BA3BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B41B094C255277A8007BA3BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B41B094F255277A8007BA3BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B41B0951255277A8007BA3BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListTableViewController.swift; sourceTree = "<group>"; };
+		B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,9 @@
 			children = (
 				B41B0943255277A6007BA3BC /* AppDelegate.swift */,
 				B41B0945255277A6007BA3BC /* SceneDelegate.swift */,
-				B41B0947255277A6007BA3BC /* ViewController.swift */,
 				B41B0949255277A7007BA3BC /* Main.storyboard */,
+				B41B09592552800F007BA3BC /* NoteListTableViewCell.swift */,
+				B41B095725527FD7007BA3BC /* NoteListTableViewController.swift */,
 				B41B094C255277A8007BA3BC /* Assets.xcassets */,
 				B41B094E255277A8007BA3BC /* LaunchScreen.storyboard */,
 				B41B0951255277A8007BA3BC /* Info.plist */,
@@ -138,9 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B41B0948255277A6007BA3BC /* ViewController.swift in Sources */,
+				B41B095825527FD7007BA3BC /* NoteListTableViewController.swift in Sources */,
 				B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */,
 				B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */,
+				B41B095A2552800F007BA3BC /* NoteListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
