@@ -18,6 +18,13 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation = CLLocation()
     
+    var noteDate: String?
+    var noteLocation: String?
+    var noteContent: String?
+    var notePhoto: Data?
+    var noteLat: Double?
+    var noteLong: Double?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +44,21 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         addContent.delegate = self
         
         addDate.text = currentDate()
+        
+        // observe keyboard
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // keyboard methods
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 310, right: 0.0)
+        self.addContent.contentInset = contentInsets
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0.0,left: 0.0,bottom: 0.0,right: 0.0)
+        self.addContent.contentInset = contentInsets
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +71,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         locationManager.stopUpdatingLocation()
     }
     
+    // hide keyboard when click blank area
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.addContent.resignFirstResponder()
         self.view.endEditing(false)
@@ -60,9 +83,9 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         currentLocation = location
         
         if location.horizontalAccuracy > 0 {
-            //self.locationManager.stopUpdatingLocation()
-            print(location.coordinate.latitude)
-            print(location.coordinate.longitude)
+            // set note location
+            self.noteLat = location.coordinate.latitude
+            self.noteLong = location.coordinate.longitude
         }
         
         let geocoder = CLGeocoder()
@@ -76,6 +99,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
             if placemark.count > 0 {
                 place = placemarks![0] as CLPlacemark
                 print("address: \(place?.name! ?? "No Address")")
+                // set add location name
                 self.addLocation.text = place?.name! ?? "No Address"
             } else {
                 print("Cannot get the address")
@@ -83,11 +107,18 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         })
     }
     
+    // MARK: - Storyboard Button Methods
+    
     @IBAction func cancelAdd(_ sender: Any) {
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func saveAdd(_ sender: Any) {
+        noteDate = addDate.text
+        noteLocation = addLocation.text
+        noteContent = addContent.text
+        
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - UITextView Delegate
@@ -114,6 +145,8 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         let time = dateformatter.string(from: Date())
         return time
     }
+    
+    
     
     /*
     // MARK: - Navigation
