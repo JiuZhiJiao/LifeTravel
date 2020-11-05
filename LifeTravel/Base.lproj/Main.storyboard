@@ -57,18 +57,52 @@
         <!--Add Note-->
         <scene sceneID="jDc-AX-DBQ">
             <objects>
-                <viewController id="qRo-Jk-Syl" sceneMemberID="viewController">
+                <viewController id="qRo-Jk-Syl" customClass="AddNoteViewController" customModule="LifeTravel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hgi-7c-622">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pye-zw-uY8">
+                                <rect key="frame" x="32" y="104" width="311" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvV-DS-3lq">
+                                <rect key="frame" x="32" y="142" width="311" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBr-pY-YAq">
+                                <rect key="frame" x="32" y="181" width="311" height="357"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="yes"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="LT4-zi-P28" firstAttribute="trailing" secondItem="pye-zw-uY8" secondAttribute="trailing" constant="32" id="2WN-w0-6uT"/>
+                            <constraint firstItem="AvV-DS-3lq" firstAttribute="top" secondItem="pye-zw-uY8" secondAttribute="bottom" constant="8" id="4O5-7C-8Tf"/>
+                            <constraint firstItem="AvV-DS-3lq" firstAttribute="leading" secondItem="LT4-zi-P28" secondAttribute="leading" constant="32" id="NF6-Ny-uZb"/>
+                            <constraint firstItem="pye-zw-uY8" firstAttribute="top" secondItem="LT4-zi-P28" secondAttribute="top" constant="16" id="mgt-2e-oZg"/>
+                            <constraint firstItem="LT4-zi-P28" firstAttribute="trailing" secondItem="AvV-DS-3lq" secondAttribute="trailing" constant="32" id="tb8-WN-NYI"/>
+                            <constraint firstItem="pye-zw-uY8" firstAttribute="leading" secondItem="LT4-zi-P28" secondAttribute="leading" constant="32" id="wMt-Jd-P14"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="LT4-zi-P28"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Note" id="R6P-rb-yL2"/>
+                    <navigationItem key="navigationItem" title="Add Note" id="R6P-rb-yL2">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2om-wm-Ne2"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="waW-1f-YY3"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ueq-6U-7Gn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1028" y="522"/>
+            <point key="canvasLocation" x="-1028" y="521.67487684729065"/>
         </scene>
         <!--NoteList-->
         <scene sceneID="ZGg-9a-rj6">

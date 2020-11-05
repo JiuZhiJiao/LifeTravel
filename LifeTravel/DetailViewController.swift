@@ -24,6 +24,7 @@ class DetailViewController: UIViewController {
         detailDate.text = note?.date
         detailLocation.text = note?.location
         detailContent.text = note?.content
+        
     }
     
 

@@ -19,6 +19,7 @@
 		B41B096225528600007BA3BC /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B096025528600007BA3BC /* Note+CoreDataProperties.swift */; };
 		B41B096525528656007BA3BC /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B096425528656007BA3BC /* DatabaseProtocol.swift */; };
 		B41B09682552882F007BA3BC /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B09672552882F007BA3BC /* MulticastDelegate.swift */; };
+		B481C01E2553AC4B00B03A09 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B481C01D2553AC4B00B03A09 /* AddNoteViewController.swift */; };
 		B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F502552905B00E10847 /* CoreDataController.swift */; };
 		B4A57F532552A0A600E10847 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F522552A0A600E10847 /* DetailViewController.swift */; };
 		B4A57F572552CCFC00E10847 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A57F562552CCFC00E10847 /* TabBarViewController.swift */; };
@@ -41,6 +42,7 @@
 		B41B096025528600007BA3BC /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B41B096425528656007BA3BC /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
 		B41B09672552882F007BA3BC /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		B481C01D2553AC4B00B03A09 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		B4A57F502552905B00E10847 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		B4A57F522552A0A600E10847 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		B4A57F562552CCFC00E10847 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				B4A57F5A2552D4F400E10847 /* LocationAnnotation.swift */,
 				B4A57F582552D4D700E10847 /* MapViewController.swift */,
 				B4A57F522552A0A600E10847 /* DetailViewController.swift */,
+				B481C01D2553AC4B00B03A09 /* AddNoteViewController.swift */,
 				B41B094C255277A8007BA3BC /* Assets.xcassets */,
 				B41B094E255277A8007BA3BC /* LaunchScreen.storyboard */,
 				B41B0951255277A8007BA3BC /* Info.plist */,
@@ -211,6 +214,7 @@
 				B41B096225528600007BA3BC /* Note+CoreDataProperties.swift in Sources */,
 				B4A57F592552D4D700E10847 /* MapViewController.swift in Sources */,
 				B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */,
+				B481C01E2553AC4B00B03A09 /* AddNoteViewController.swift in Sources */,
 				B41B095E2552850D007BA3BC /* LifeTravelData.xcdatamodeld in Sources */,
 				B41B096125528600007BA3BC /* Note+CoreDataClass.swift in Sources */,
 				B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */,
