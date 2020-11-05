@@ -8,16 +8,51 @@
 
 import UIKit
 
-class AddNoteViewController: UIViewController {
-
+class AddNoteViewController: UIViewController, UITextViewDelegate {
+    
+    @IBOutlet weak var addDate: UILabel!
+    @IBOutlet weak var addLocation: UILabel!
+    @IBOutlet weak var addContent: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        addContent.delegate = self
+        
+        addDate.text = currentDate()
     }
     
+    @IBAction func cancelAdd(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
     
-
+    @IBAction func saveAdd(_ sender: Any) {
+    }
+    
+    // MARK: - UITextView Delegate
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        let high = view.frame.height - 216
+        let rect = CGRect(origin: textView.frame.origin, size: CGSize(width: textView.frame.width, height: high))
+        textView.frame = rect
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        addContent.resignFirstResponder()
+        addContent.frame = view.frame
+    }
+    
+    // MARK: - Other Methods
+    
+    // get current date
+    func currentDate() -> String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "YYYY-MM-dd"
+        let time = dateformatter.string(from: Date())
+        return time
+    }
+    
     /*
     // MARK: - Navigation
 

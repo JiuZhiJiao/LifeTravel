@@ -74,31 +74,64 @@
                                 <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qBr-pY-YAq">
-                                <rect key="frame" x="32" y="181" width="311" height="357"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Input the content" translatesAutoresizingMaskIntoConstraints="NO" id="qBr-pY-YAq">
+                                <rect key="frame" x="28" y="171" width="319" height="575"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" spellCheckingType="yes"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1G-6g-7cM">
+                                <rect key="frame" x="293" y="696" width="50" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Sr6-8I-TNf"/>
+                                    <constraint firstAttribute="height" constant="50" id="pzC-XH-l1O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="camera.circle" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="LT4-zi-P28" firstAttribute="trailing" secondItem="pye-zw-uY8" secondAttribute="trailing" constant="32" id="2WN-w0-6uT"/>
+                            <constraint firstItem="LT4-zi-P28" firstAttribute="trailing" secondItem="F1G-6g-7cM" secondAttribute="trailing" constant="32" id="2zV-De-brY"/>
                             <constraint firstItem="AvV-DS-3lq" firstAttribute="top" secondItem="pye-zw-uY8" secondAttribute="bottom" constant="8" id="4O5-7C-8Tf"/>
+                            <constraint firstItem="LT4-zi-P28" firstAttribute="bottom" secondItem="qBr-pY-YAq" secondAttribute="bottom" constant="32" id="DYy-Yr-sXY"/>
+                            <constraint firstItem="LT4-zi-P28" firstAttribute="trailing" secondItem="qBr-pY-YAq" secondAttribute="trailing" constant="28" id="KOd-fG-Da0"/>
                             <constraint firstItem="AvV-DS-3lq" firstAttribute="leading" secondItem="LT4-zi-P28" secondAttribute="leading" constant="32" id="NF6-Ny-uZb"/>
+                            <constraint firstItem="qBr-pY-YAq" firstAttribute="leading" secondItem="LT4-zi-P28" secondAttribute="leading" constant="28" id="UcM-Nd-9uT"/>
+                            <constraint firstItem="qBr-pY-YAq" firstAttribute="top" secondItem="AvV-DS-3lq" secondAttribute="bottom" constant="8" id="bvE-lp-c3W"/>
                             <constraint firstItem="pye-zw-uY8" firstAttribute="top" secondItem="LT4-zi-P28" secondAttribute="top" constant="16" id="mgt-2e-oZg"/>
+                            <constraint firstItem="LT4-zi-P28" firstAttribute="bottom" secondItem="F1G-6g-7cM" secondAttribute="bottom" constant="32" id="ot9-Sx-rE6"/>
                             <constraint firstItem="LT4-zi-P28" firstAttribute="trailing" secondItem="AvV-DS-3lq" secondAttribute="trailing" constant="32" id="tb8-WN-NYI"/>
                             <constraint firstItem="pye-zw-uY8" firstAttribute="leading" secondItem="LT4-zi-P28" secondAttribute="leading" constant="32" id="wMt-Jd-P14"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LT4-zi-P28"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Note" id="R6P-rb-yL2">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2om-wm-Ne2"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="waW-1f-YY3"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2om-wm-Ne2">
+                            <connections>
+                                <action selector="cancelAdd:" destination="qRo-Jk-Syl" id="apT-ar-p1d"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="waW-1f-YY3">
+                            <connections>
+                                <action selector="saveAdd:" destination="qRo-Jk-Syl" id="gLO-fF-SuN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addContent" destination="qBr-pY-YAq" id="Lqb-au-UmJ"/>
+                        <outlet property="addDate" destination="pye-zw-uY8" id="i4S-8p-aE8"/>
+                        <outlet property="addLocation" destination="AvV-DS-3lq" id="R3T-7w-G7H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ueq-6U-7Gn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -284,6 +317,7 @@
         <segue reference="oJG-hG-AGn"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="camera.circle" catalog="system" width="128" height="121"/>
         <image name="icloud" catalog="system" width="128" height="88"/>
         <image name="map" catalog="system" width="128" height="113"/>
         <image name="tray" catalog="system" width="128" height="88"/>
