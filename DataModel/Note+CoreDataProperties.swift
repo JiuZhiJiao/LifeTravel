@@ -19,7 +19,7 @@ extension Note {
 
     @NSManaged public var content: String?
     @NSManaged public var date: String?
-    @NSManaged public var photo: Data?
+    @NSManaged public var photo: String?
     @NSManaged public var location: String?
     @NSManaged public var lat: Double
     @NSManaged public var long: Double

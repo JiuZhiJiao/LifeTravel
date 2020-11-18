@@ -20,7 +20,7 @@ protocol DatabaseListener: AnyObject {
 
 protocol DatabaseProtocol: AnyObject {
     func cleanup()
-    func addNote(date:String, location:String, lat:Double, long: Double, photo:Data, content: String) -> Note
+    func addNote(date:String, location:String, lat:Double, long: Double, photo:String, content: String) -> Note
     func addNote(date:String, location:String, lat:Double, long: Double, content: String) -> Note
     func deleteNote(note:Note)
     func addListener(listener:DatabaseListener)

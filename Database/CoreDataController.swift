@@ -18,7 +18,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     var allNotesFetchedResultController: NSFetchedResultsController<Note>?
     
     override init() {
-        persistentContainer = NSPersistentContainer(name: "LifeTravelData")
+        persistentContainer = NSPersistentContainer(name: "LifeTravel")
         persistentContainer.loadPersistentStores() {(description,error) in
             if let error = error {
                 fatalError("Failed to load Core Data stack: \(error)")
@@ -75,7 +75,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         saveContext()
     }
     
-    func addNote(date: String, location: String, lat: Double, long: Double, photo: Data, content: String) -> Note {
+    func addNote(date: String, location: String, lat: Double, long: Double, photo: String, content: String) -> Note {
         let note = NSEntityDescription.insertNewObject(forEntityName: "Note", into: persistentContainer.viewContext) as! Note
         note.date = date
         note.location = location
@@ -117,13 +117,13 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
     // init notes
     func initNotes() {
         print("init notes...")
-        let _ = addNote(date: "2020-03-20", location: "37 Moonya Rd", lat: -37.896862, long: 145.059791, content: "Here is the content on the 37 Moonya Road, and here is more information about this, lovely friend.")
-        let _ = addNote(date: "2020-06-20", location: "67 Woornack Rd", lat: -37.898399, long: 145.062179, content: "Here is the content on the 67 Woornack Road, and here is more information about this, home sweety home.")
-        let _ = addNote(date: "2020-07-13", location: "24 Rosanna St", lat: -37.898691, long: 145.059814, content: "Here is the content on the 24 Rosanna Street, and here is more information about this, nice garden.")
-        let _ = addNote(date: "2020-09-22", location: "Koornang Park", lat: -37.894788, long: 145.054450, content: "Here is the content on the Koornang Park, and here is more information about this, good park.")
-        let _ = addNote(date: "2020-09-28", location: "Woolworths Carnegie", lat: -37.887559, long: 145.056396, content: "Here is the content on the Woolworths Carnegie, and here is more information about this, nice shopping center.")
-        let _ = addNote(date: "2020-10-11", location: "Bon Chicken & Beer", lat: -37.888330, long: 145.057039, content: "Here is the content on the Bon Chicken & Beer, and here is more information about this, lovely place.")
-        let _ = addNote(date: "2020-05-13", location: "State Library Victoria", lat: -37.809729, long: 144.965176, content: "Here is the content on the State Library Victoria, and here is more information about this, huge miracle.")
+        let _ = addNote(date: "2020-03-20", location: "37 Moonya Rd", lat: -37.896862, long: 145.059791, photo: "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322", content: "Here is the content on the 37 Moonya Road, and here is more information about this, lovely friend.")
+        let _ = addNote(date: "2020-06-20", location: "67 Woornack Rd", lat: -37.898399, long: 145.062179, photo: "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322", content: "Here is the content on the 67 Woornack Road, and here is more information about this, home sweety home.")
+        let _ = addNote(date: "2020-07-13", location: "24 Rosanna St", lat: -37.898691, long: 145.059814, photo: "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322", content: "Here is the content on the 24 Rosanna Street, and here is more information about this, nice garden.")
+        let _ = addNote(date: "2020-09-22", location: "Koornang Park", lat: -37.894788, long: 145.054450, photo: "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322", content: "Here is the content on the Koornang Park, and here is more information about this, good park.")
+        let _ = addNote(date: "2020-09-28", location: "Woolworths Carnegie", lat: -37.887559, long: 145.056396, photo: "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322", content: "Here is the content on the Woolworths Carnegie, and here is more information about this, nice shopping center.")
+        let _ = addNote(date: "2020-10-11", location: "Bon Chicken & Beer", lat: -37.888330, long: 145.057039, photo: "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322", content: "Here is the content on the Bon Chicken & Beer, and here is more information about this, lovely place.")
+        let _ = addNote(date: "2020-05-13", location: "State Library Victoria", lat: -37.809729, long: 144.965176, photo: "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322", content: "Here is the content on the State Library Victoria, and here is more information about this, huge miracle.")
     }
     
     // save change to CoreData
