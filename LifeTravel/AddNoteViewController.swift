@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate {
+class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var addDate: UILabel!
     @IBOutlet weak var addLocation: UILabel!
@@ -18,10 +18,12 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation = CLLocation()
     
+    var image: UIImage?
+    
     var noteDate: String?
     var noteLocation: String?
     var noteContent: String?
-    var notePhoto: Data?
+    var notePhoto: String?
     var noteLat: Double?
     var noteLong: Double?
     
@@ -118,7 +120,35 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         noteLocation = addLocation.text
         noteContent = addContent.text
         
+        // upload the photo taken or selected by user
+        
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func takePhoto(_ sender: Any) {
+        let picker = UIImagePickerController()
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+        }
+        
+        picker.allowsEditing = false
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
+    
+    // MARK: - UIImage Picker Controller Delegate
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[.originalImage] as? UIImage {
+            self.image = pickedImage
+            print("photo taken")
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
     
     // MARK: - UITextView Delegate
