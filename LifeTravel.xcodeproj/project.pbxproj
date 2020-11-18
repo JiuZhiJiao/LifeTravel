@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EE7462E072D816F1ED4B7A1 /* Pods_LifeTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A69157FAF0DC962DAC1251 /* Pods_LifeTravel.framework */; };
+		21C875902564D17D005168FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C8758F2564D17D005168FA /* GoogleService-Info.plist */; };
 		B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B0943255277A6007BA3BC /* AppDelegate.swift */; };
 		B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B0945255277A6007BA3BC /* SceneDelegate.swift */; };
 		B41B094B255277A7007BA3BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B41B0949255277A7007BA3BC /* Main.storyboard */; };
@@ -28,6 +30,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F164B75E982F29779C798F5 /* Pods-LifeTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTravel.release.xcconfig"; path = "Target Support Files/Pods-LifeTravel/Pods-LifeTravel.release.xcconfig"; sourceTree = "<group>"; };
+		21C8758F2564D17D005168FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		84A69157FAF0DC962DAC1251 /* Pods_LifeTravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8FFAAAEF5DC5B683AB36B8E5 /* Pods-LifeTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTravel.debug.xcconfig"; path = "Target Support Files/Pods-LifeTravel/Pods-LifeTravel.debug.xcconfig"; sourceTree = "<group>"; };
 		B41B0940255277A6007BA3BC /* LifeTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B41B0943255277A6007BA3BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B41B0945255277A6007BA3BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,12 +65,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EE7462E072D816F1ED4B7A1 /* Pods_LifeTravel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78B41B698E1C7B2A5D8F410E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84A69157FAF0DC962DAC1251 /* Pods_LifeTravel.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B41B0937255277A6007BA3BC = {
 			isa = PBXGroup;
 			children = (
@@ -73,6 +88,8 @@
 				B41B095B255284BE007BA3BC /* DataModel */,
 				B41B0942255277A6007BA3BC /* LifeTravel */,
 				B41B0941255277A6007BA3BC /* Products */,
+				F91D5CF2F458023D29239306 /* Pods */,
+				78B41B698E1C7B2A5D8F410E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +104,7 @@
 		B41B0942255277A6007BA3BC /* LifeTravel */ = {
 			isa = PBXGroup;
 			children = (
+				21C8758F2564D17D005168FA /* GoogleService-Info.plist */,
 				B41B0943255277A6007BA3BC /* AppDelegate.swift */,
 				B41B0945255277A6007BA3BC /* SceneDelegate.swift */,
 				B4A57F562552CCFC00E10847 /* TabBarViewController.swift */,
@@ -135,6 +153,15 @@
 			path = GPXFile;
 			sourceTree = "<group>";
 		};
+		F91D5CF2F458023D29239306 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8FFAAAEF5DC5B683AB36B8E5 /* Pods-LifeTravel.debug.xcconfig */,
+				0F164B75E982F29779C798F5 /* Pods-LifeTravel.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -142,9 +169,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B41B0954255277A8007BA3BC /* Build configuration list for PBXNativeTarget "LifeTravel" */;
 			buildPhases = (
+				F250DAE5110AFDF4C32E1BB8 /* [CP] Check Pods Manifest.lock */,
 				B41B093C255277A6007BA3BC /* Sources */,
 				B41B093D255277A6007BA3BC /* Frameworks */,
 				B41B093E255277A6007BA3BC /* Resources */,
+				C95AB99B6E286A7198C0BAF6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -194,12 +223,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				B41B0950255277A8007BA3BC /* LaunchScreen.storyboard in Resources */,
+				21C875902564D17D005168FA /* GoogleService-Info.plist in Resources */,
 				B41B094D255277A8007BA3BC /* Assets.xcassets in Resources */,
 				B41B094B255277A7007BA3BC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C95AB99B6E286A7198C0BAF6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LifeTravel/Pods-LifeTravel-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LifeTravel/Pods-LifeTravel-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeTravel/Pods-LifeTravel-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F250DAE5110AFDF4C32E1BB8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeTravel-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B41B093C255277A6007BA3BC /* Sources */ = {
@@ -362,6 +434,7 @@
 		};
 		B41B0955255277A8007BA3BC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FFAAAEF5DC5B683AB36B8E5 /* Pods-LifeTravel.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -380,6 +453,7 @@
 		};
 		B41B0956255277A8007BA3BC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F164B75E982F29779C798F5 /* Pods-LifeTravel.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
