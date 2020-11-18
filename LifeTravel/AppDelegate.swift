@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         databaseController = CoreDataController()
         // set navigation
         
-        
+        // firebase configuration
+        FirebaseApp.configure()
         return true
     }
 

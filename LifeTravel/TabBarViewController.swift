@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class TabBarViewController: UITabBarController {
 
@@ -20,7 +21,15 @@ class TabBarViewController: UITabBarController {
         
     }
     
-
+    @IBAction func logOutOfAccount(_ sender: Any) {
+        do{
+            try Auth.auth().signOut()
+        } catch {
+            print("Log out error: \(error.localizedDescription)")
+        }
+        navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // MARK: - Navigation
 

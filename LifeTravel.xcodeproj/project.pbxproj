@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1EE7462E072D816F1ED4B7A1 /* Pods_LifeTravel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A69157FAF0DC962DAC1251 /* Pods_LifeTravel.framework */; };
 		21C875902564D17D005168FA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21C8758F2564D17D005168FA /* GoogleService-Info.plist */; };
+		21C875922564E495005168FA /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C875912564E495005168FA /* AuthViewController.swift */; };
+		21C875942564EC18005168FA /* CloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C875932564EC18005168FA /* CloudViewController.swift */; };
 		B41B0944255277A6007BA3BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B0943255277A6007BA3BC /* AppDelegate.swift */; };
 		B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41B0945255277A6007BA3BC /* SceneDelegate.swift */; };
 		B41B094B255277A7007BA3BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B41B0949255277A7007BA3BC /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		0F164B75E982F29779C798F5 /* Pods-LifeTravel.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTravel.release.xcconfig"; path = "Target Support Files/Pods-LifeTravel/Pods-LifeTravel.release.xcconfig"; sourceTree = "<group>"; };
 		21C8758F2564D17D005168FA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		21C875912564E495005168FA /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		21C875932564EC18005168FA /* CloudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudViewController.swift; sourceTree = "<group>"; };
 		84A69157FAF0DC962DAC1251 /* Pods_LifeTravel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTravel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FFAAAEF5DC5B683AB36B8E5 /* Pods-LifeTravel.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTravel.debug.xcconfig"; path = "Target Support Files/Pods-LifeTravel/Pods-LifeTravel.debug.xcconfig"; sourceTree = "<group>"; };
 		B41B0940255277A6007BA3BC /* LifeTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +122,8 @@
 				B41B094C255277A8007BA3BC /* Assets.xcassets */,
 				B41B094E255277A8007BA3BC /* LaunchScreen.storyboard */,
 				B41B0951255277A8007BA3BC /* Info.plist */,
+				21C875912564E495005168FA /* AuthViewController.swift */,
+				21C875932564EC18005168FA /* CloudViewController.swift */,
 			);
 			path = LifeTravel;
 			sourceTree = "<group>";
@@ -282,6 +288,7 @@
 				B41B096525528656007BA3BC /* DatabaseProtocol.swift in Sources */,
 				B41B095825527FD7007BA3BC /* NoteListTableViewController.swift in Sources */,
 				B4A57F512552905B00E10847 /* CoreDataController.swift in Sources */,
+				21C875922564E495005168FA /* AuthViewController.swift in Sources */,
 				B4A57F572552CCFC00E10847 /* TabBarViewController.swift in Sources */,
 				B41B096225528600007BA3BC /* Note+CoreDataProperties.swift in Sources */,
 				B4A57F592552D4D700E10847 /* MapViewController.swift in Sources */,
@@ -289,6 +296,7 @@
 				B481C01E2553AC4B00B03A09 /* AddNoteViewController.swift in Sources */,
 				B41B095E2552850D007BA3BC /* LifeTravelData.xcdatamodeld in Sources */,
 				B41B096125528600007BA3BC /* Note+CoreDataClass.swift in Sources */,
+				21C875942564EC18005168FA /* CloudViewController.swift in Sources */,
 				B41B0946255277A6007BA3BC /* SceneDelegate.swift in Sources */,
 				B4A57F5B2552D4F400E10847 /* LocationAnnotation.swift in Sources */,
 				B41B095A2552800F007BA3BC /* NoteListTableViewCell.swift in Sources */,
