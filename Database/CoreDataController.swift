@@ -102,6 +102,14 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         persistentContainer.viewContext.delete(note)
     }
     
+    func deleteAll() {
+        var allnotes = [Note]()
+        allnotes = fetchAllNotes()
+        for note in allnotes {
+            persistentContainer.viewContext.delete(note)
+        }
+    }
+    
     func addListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
         

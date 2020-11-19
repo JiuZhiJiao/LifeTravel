@@ -43,42 +43,70 @@ class CloudViewController: UIViewController {
             displayMessage("Cannot upload unitl logged in", "Error")
             return
         }
+        // set note reference
         notesRef = self.userReference.document("\(userID)").collection("notes")
-        //userReference.document("\(userID)").collection("notes").document().delete()
         
         notesRef!.getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print(error)
             } else {
+                //delete all notes on the cloud
                 for doc in querySnapshot!.documents{
                     let docId = doc.documentID
                     self.notesRef!.document(docId).delete()
                 }
+                //upload all notes to the cloud
+                for note in localNotes {
+                    self.notesRef?.addDocument(data: [
+                        "content": note.content!,
+                        "date": note.date!,
+                        "location": note.location!,
+                        "photo": note.photo!,
+                        "lat": note.lat,
+                        "long": note.long
+                    ])
+                }
             }
         }
-        
-        for note in localNotes {
-            notesRef?.addDocument(data: [
-                "content": note.content!,
-                "date": note.date!,
-                "location": note.location!,
-                "photo": note.photo!,
-                "lat": note.lat,
-                "long": note.long
-            ])
-        }
-       
-        
         
         let alertController = UIAlertController(title: "Success",
                message: "Your notes have been uploaded!", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
-        
     }
     
     @IBAction func downloadNotes(_ sender: Any) {
+        databaseController?.deleteAll()
+        
+        guard let userID = Auth.auth().currentUser?.uid else {
+            displayMessage("Cannot download unitl logged in", "Error")
+            return
+        }
+        // set note reference
+        notesRef = self.userReference.document("\(userID)").collection("notes")
+        notesRef!.getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print(error)
+            } else {
+                //delete all notes on the cloud
+                for doc in querySnapshot!.documents {
+                    let content = doc["content"] as! String
+                    let date = doc["date"] as! String
+                    let location = doc["location"] as! String
+                    let photo = doc["photo"] as! String
+                    let lat = doc["lat"] as! Double
+                    let long = doc["long"] as! Double
+                    self.databaseController?.addNote(date: date, location: location, lat: lat, long: long, photo: photo, content: content)
+                }
+            }
+        }
+        
+        let alertController = UIAlertController(title: "Success",
+               message: "Your notes have been downloaded!", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true)
     }
     /*
     // MARK: - Navigation

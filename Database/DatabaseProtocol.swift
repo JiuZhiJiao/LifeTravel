@@ -26,4 +26,5 @@ protocol DatabaseProtocol: AnyObject {
     func addListener(listener:DatabaseListener)
     func removeListener(listener:DatabaseListener)
     func fetchAllNotes() -> [Note]
+    func deleteAll()
 }
