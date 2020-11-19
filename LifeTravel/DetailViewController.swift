@@ -96,16 +96,19 @@ class DetailViewController: UIViewController {
         if editButton.currentTitle == "Edit" {
             // change button states
             editButton.setTitle("Save", for: .normal)
-            print("editing...")
+            shareButton.backgroundColor = .systemGray
             shareButton.isUserInteractionEnabled = false
             shareButton.alpha = 0.4
             
             // text field can be editted
             self.detailText.isEditable = true
         } else {
+            // update data
+            note?.content = detailText.text
+            
             // change button states
             editButton.setTitle("Edit", for: .normal)
-            print("saving...")
+            shareButton.backgroundColor = .systemBlue
             shareButton.isUserInteractionEnabled = true
             shareButton.alpha = 1
             
