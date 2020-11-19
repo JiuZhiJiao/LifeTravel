@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Social
 
 class DetailViewController: UIViewController {
     
@@ -27,9 +26,14 @@ class DetailViewController: UIViewController {
         detailLocation.text = note?.location
         detailContent.text = note?.content
         
-        //path = "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322"
+        path = "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322"
         
-        detailImage.image = requestImage(from: note?.photo)
+        if note?.photo?.isEmpty == true {
+            detailImage.image = requestImage(from: path)
+        } else {
+            detailImage.image = requestImage(from: note?.photo)
+        }
+        
         
     }
     
@@ -51,14 +55,15 @@ class DetailViewController: UIViewController {
         return image
     }
     
-    // share button to share to Twitter
+    // share button to share image and content of a note
     @IBAction func share(_ sender: Any) {
-        /*
-        if let shareVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
-            shareVC.add(self.detailImage.image)
-            shareVC.setInitialText(self.detailContent.text)
+        var activityVC: UIActivityViewController
+        if self.note?.photo?.isEmpty == true {
+            activityVC = UIActivityViewController(activityItems: [detailContent.text!], applicationActivities: nil)
+        } else {
+            activityVC = UIActivityViewController(activityItems: [detailImage.image!,detailContent.text!], applicationActivities: nil)
         }
-        */
+        self.present(activityVC, animated: true, completion: nil)
     }
     
     // edit button to edit selected note

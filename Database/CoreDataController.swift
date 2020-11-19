@@ -93,6 +93,7 @@ class CoreDataController: NSObject, DatabaseProtocol, NSFetchedResultsController
         note.location = location
         note.lat = lat
         note.long = long
+        note.photo = ""
         note.content = content
         
         return note
