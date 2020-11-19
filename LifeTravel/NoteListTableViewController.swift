@@ -13,6 +13,10 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
     let CELL = "noteCell"
     var notes: [Note] = []
     var selectedNote: Note?
+    
+    var sections: [String] = []
+    var secNotes: [String: [Note]] = [:]
+    
     weak var databaseController: DatabaseProtocol?
 
     override func viewDidLoad() {
@@ -36,17 +40,18 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return self.sections.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notes.count
+        return self.secNotes[sections[section]]!.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL, for: indexPath) as! NoteListTableViewCell
 
-        let note = notes[indexPath.row]
+        let currentNotes = secNotes[sections[indexPath.section]]
+        let note = currentNotes![indexPath.row]
         cell.noteDate.text = note.date
         cell.noteLocation.text = note.location
         cell.noteContent.text = note.content
@@ -95,7 +100,34 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
     func onNoteListChange(change: DatabaseChange, notes: [Note]) {
         self.notes = notes
         print(notes.count)
+        
+        // make sectinos of all notes
+        setSections()
+        
         tableView.reloadData()
     }
+    
+    func setSections() {
+        sections.removeAll()
+        for note in notes {
+            let date = String((note.date?.prefix(7)) ?? "2020-02-02")
+            if sections.contains(date) == false {
+                sections.append(date)
+            }
+        }
+        
+        for section in sections {
+            var filterNotes: [Note] = []
+            
+            for note in notes {
+                if note.date?.contains(section) == true {
+                    filterNotes.append(note)
+                }
+            }
+            
+            secNotes[section] = filterNotes
+        }
+    }
+    
 
 }
