@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreLocation
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseStorage
 
 class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -19,6 +22,10 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     var currentLocation: CLLocation = CLLocation()
     
     var image: UIImage?
+    
+    // Firebase Ref
+    var imageRef = Firestore.firestore().collection("images")
+    var storageReference = Storage.storage().reference()
     
     var noteDate: String?
     var noteLocation: String?
@@ -121,6 +128,36 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         noteContent = addContent.text
         
         // upload the photo taken or selected by user
+        if self.image != nil {
+            let img = self.image
+            //let date = UInt(Date().timeIntervalSince1970)
+            //      let filename = "\(date).jpg"
+            guard let data = img?.jpegData(compressionQuality: 0.2) else {
+                displayMessage("Image can not be compressed.", "Error")
+                return
+            }
+            
+            let imgRef = storageReference.child("images")
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpg"
+            imgRef.putData(data, metadata: metadata){(meta, error) in
+                if error != nil {
+                    self.displayMessage("Could not upload image to firebase", "Error")
+                } else {
+                    imgRef.downloadURL{(url, error) in
+                        guard let downloadURL = url else {
+                            print("Download URL not found")
+                            return
+                        }
+                        
+                        self.imageRef.document("\(data)").setData(["url":"\(downloadURL)"])
+                        self.notePhoto = downloadURL.absoluteString
+                        print(self.notePhoto!)
+                    }
+                }
+            }
+        }
+        
         
         navigationController?.popViewController(animated: true)
     }
@@ -176,6 +213,12 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         return time
     }
     
+    // display message
+    func displayMessage(_ message: String,_ title: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+    }
     
     
     /*

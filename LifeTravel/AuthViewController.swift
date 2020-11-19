@@ -16,6 +16,11 @@ class AuthViewController: UIViewController {
     var handle: AuthStateDidChangeListenerHandle?
     
     override func viewWillAppear(_ animated: Bool) {
+        // set the navigation bar
+        self.navigationController?.navigationBar.barTintColor = .systemBlue
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.font:UIFont(name: "AppleSDGothicNeo-Bold", size: 28)!]
+        self.navigationController?.navigationBar.tintColor = .white
+        
         super.viewWillAppear(animated)
         handle = Auth.auth().addStateDidChangeListener( { (auth, user) in
             if user != nil {

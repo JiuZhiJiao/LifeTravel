@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Social
 
 class DetailViewController: UIViewController {
     
@@ -50,7 +51,19 @@ class DetailViewController: UIViewController {
         return image
     }
     
-
+    // share button to share to Twitter
+    @IBAction func share(_ sender: Any) {
+        /*
+        if let shareVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter) {
+            shareVC.add(self.detailImage.image)
+            shareVC.setInitialText(self.detailContent.text)
+        }
+        */
+    }
+    
+    // edit button to edit selected note
+    @IBAction func edit(_ sender: Any) {
+    }
     /*
     // MARK: - Navigation
 
