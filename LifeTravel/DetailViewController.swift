@@ -13,7 +13,9 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailImage: UIImageView!
     @IBOutlet weak var detailLocation: UILabel!
     @IBOutlet weak var detailDate: UILabel!
-    @IBOutlet weak var detailContent: UILabel!
+    @IBOutlet weak var detailText: UITextView!
+    @IBOutlet weak var shareButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     
     var note: Note?
     var path: String?
@@ -24,7 +26,7 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         detailDate.text = note?.date
         detailLocation.text = note?.location
-        detailContent.text = note?.content
+        detailText.text = note?.content
         
         path = "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322"
         
@@ -34,7 +36,30 @@ class DetailViewController: UIViewController {
             detailImage.image = requestImage(from: note?.photo)
         }
         
+        // observe keyboard
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= (keyboardSize.height - 150)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    // hide keyboard when click blank area
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.detailText.resignFirstResponder()
+        self.view.endEditing(false)
     }
     
     // Download Image
@@ -59,16 +84,39 @@ class DetailViewController: UIViewController {
     @IBAction func share(_ sender: Any) {
         var activityVC: UIActivityViewController
         if self.note?.photo?.isEmpty == true {
-            activityVC = UIActivityViewController(activityItems: [detailContent.text!], applicationActivities: nil)
+            activityVC = UIActivityViewController(activityItems: [detailText.text!], applicationActivities: nil)
         } else {
-            activityVC = UIActivityViewController(activityItems: [detailImage.image!,detailContent.text!], applicationActivities: nil)
+            activityVC = UIActivityViewController(activityItems: [detailImage.image!,detailText.text!], applicationActivities: nil)
         }
         self.present(activityVC, animated: true, completion: nil)
     }
     
     // edit button to edit selected note
     @IBAction func edit(_ sender: Any) {
+        if editButton.currentTitle == "Edit" {
+            // change button states
+            editButton.setTitle("Save", for: .normal)
+            print("editing...")
+            shareButton.isUserInteractionEnabled = false
+            shareButton.alpha = 0.4
+            
+            // text field can be editted
+            self.detailText.isEditable = true
+        } else {
+            // change button states
+            editButton.setTitle("Edit", for: .normal)
+            print("saving...")
+            shareButton.isUserInteractionEnabled = true
+            shareButton.alpha = 1
+            
+            // text fiedl cannot be editted
+            self.detailText.isEditable = false
+        }
+        
     }
+    
+    
+    
     /*
     // MARK: - Navigation
 
