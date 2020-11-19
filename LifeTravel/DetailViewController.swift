@@ -102,6 +102,7 @@ class DetailViewController: UIViewController {
             
             // text field can be editted
             self.detailText.isEditable = true
+            self.detailText.becomeFirstResponder()
         } else {
             // update data
             note?.content = detailText.text

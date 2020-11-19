@@ -46,6 +46,23 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.secNotes[sections[section]]!.count
     }
+    
+    // set the section header
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
+        
+        let sectionText = UILabel()
+        sectionText.frame = CGRect.init(x: 5, y: 10, width: header.frame.width-10, height: header.frame.height-10)
+        sectionText.font = .systemFont(ofSize: 14, weight: .bold)
+        sectionText.text = sections[section]
+        
+        header.addSubview(sectionText)
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL, for: indexPath) as! NoteListTableViewCell

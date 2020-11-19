@@ -12,7 +12,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
-class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DatabaseListener {
     
     @IBOutlet weak var addDate: UILabel!
     @IBOutlet weak var addLocation: UILabel!
@@ -20,6 +20,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     
     var locationManager: CLLocationManager = CLLocationManager()
     var currentLocation: CLLocation = CLLocation()
+    weak var databaseController: DatabaseProtocol?
     
     var image: UIImage?
     
@@ -51,12 +52,15 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         }
         
         addContent.delegate = self
-        
         addDate.text = currentDate()
         
         // observe keyboard
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        // databaseController
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        databaseController = appDelegate.databaseController
     }
     
     // keyboard methods
@@ -116,6 +120,11 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         })
     }
     
+    // MARK: - Database Listener Functions
+    func onNoteListChange(change: DatabaseChange, notes: [Note]) {
+        
+    }
+    
     // MARK: - Storyboard Button Methods
     
     @IBAction func cancelAdd(_ sender: Any) {
@@ -123,10 +132,6 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     }
     
     @IBAction func saveAdd(_ sender: Any) {
-        noteDate = addDate.text
-        noteLocation = addLocation.text
-        noteContent = addContent.text
-        
         // upload the photo taken or selected by user
         if self.image != nil {
             let img = self.image
@@ -153,13 +158,30 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
                         self.imageRef.document("\(data)").setData(["url":"\(downloadURL)"])
                         self.notePhoto = downloadURL.absoluteString
                         print(self.notePhoto!)
+                        self.saveNote()
                     }
                 }
             }
         }
         
-        
         navigationController?.popViewController(animated: true)
+    }
+    
+    // save note
+    func saveNote() {
+        noteDate = addDate.text
+        noteLocation = addLocation.text
+        noteContent = addContent.text
+        //setPhoto()
+        
+        print(noteDate)
+        print(noteLocation)
+        print(noteLat)
+        print(noteLong)
+        print(notePhoto)
+        print(noteContent)
+        
+        let _ = databaseController?.addNote(date: noteDate!, location: noteLocation!, lat: noteLat!, long: noteLong!, photo: notePhoto!, content: noteContent!)
     }
     
     @IBAction func takePhoto(_ sender: Any) {
