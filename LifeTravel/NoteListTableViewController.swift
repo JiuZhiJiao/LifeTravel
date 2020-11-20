@@ -86,10 +86,12 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.databaseController?.deleteNote(note: notes[indexPath.row])
+            let sectionName = sections[indexPath.section]
+            let note = secNotes[sectionName]?[indexPath.row]
+            
+            self.databaseController?.deleteNote(note: note!)
         }
     }
-    
 
     /*
     // Override to support rearranging the table view.
