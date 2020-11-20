@@ -85,59 +85,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
        
        // MARK: - UNUserNotificationCenterDelegate
 
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         
-       func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-
         guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
             return
         }
-            //var viewController = UIViewController()
-            //viewController = storyBoard.instantiateViewController(withIdentifier: "mapviewBoard")// user tap notification
-           
-
-
         
-            let conversationVC = storyBoard.instantiateViewController(withIdentifier: "tabBar") as! TabBarViewController
+        let conversationVC = storyBoard.instantiateViewController(withIdentifier: "tabBar") as! TabBarViewController
         let navcontroller = rootViewController as? UINavigationController
         conversationVC.selectedViewController = conversationVC.viewControllers![1]
         navcontroller!.pushViewController(conversationVC, animated: true)
-        
 
-            //self.window?.rootViewController = viewController
-            //self.window?.makeKeyAndVisible()
-
-            completionHandler()
-       }
-    /*
-        func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-            
-            // retrieve the root view controller (which is a tab bar controller)
-            guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController else {
-                return
-            }
-          
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-            // instantiate the view controller we want to show from storyboard
-            // root view controller is tab bar controller
-            // the selected tab is a navigation controller
-            // then we push the new view controller to it
-            if  let conversationVC = storyboard.instantiateViewController(withIdentifier: "mapviewBoard") as? MapViewController,
-                let tabBarController = rootViewController as? UITabBarController,
-                let navController = tabBarController.selectedViewController as? UINavigationController {
-
-                    // we can modify variable of the new view controller using notification data
-                    // (eg: title of notification)
-                    conversationVC.senderDisplayName = response.notification.request.content.title
-                    // you can access custom data of the push notification by using userInfo property
-                    // response.notification.request.content.userInfo
-                    navController.pushViewController(conversationVC, animated: true)
-            }
-            
-            // tell the app that we have finished processing the user’s action / response
-            completionHandler()
-        }*/
+        completionHandler()
+    }
 
     
 
