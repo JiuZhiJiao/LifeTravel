@@ -81,7 +81,8 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedNote = notes[indexPath.row]
+        let sectionName = sections[indexPath.section]
+        selectedNote = secNotes[sectionName]?[indexPath.row]
         
         // show detail of the note
         self.performSegue(withIdentifier: "showDetailSegue", sender: indexPath)

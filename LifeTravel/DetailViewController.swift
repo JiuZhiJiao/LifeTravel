@@ -32,9 +32,9 @@ class DetailViewController: UIViewController {
         path = "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322"
         
         if note?.photo?.isEmpty == true {
-            detailImage.image = requestImage(from: path)
+            setImage(str: path!)
         } else {
-            detailImage.image = requestImage(from: note?.photo)
+            setImage(str: (note?.photo)!)
         }
         
         // observe keyboard
@@ -65,22 +65,19 @@ class DetailViewController: UIViewController {
         self.view.endEditing(false)
     }
     
-    // Download Image
-    func requestImage(from str: String?) -> UIImage? {
-        guard let url = URL(string: str ?? "") else {
-            print("Unable to create URL")
-            return nil
-        }
-        var image:UIImage? = nil
+    // Download Image by using DispathQueue
+    func setImage(str: String) {
+        let url = URL(string: str)!
         
-        do {
-            let data = try Data(contentsOf: url, options: [])
-            image = UIImage(data: data)
-        } catch {
-            print(error.localizedDescription)
+        let task = URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.detailImage.image = image
+                }
+            }
         }
-        
-        return image
+        task.resume()
     }
     
     // share image and content of a note
