@@ -23,11 +23,12 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // set storyboard
         detailDate.text = note?.date
         detailLocation.text = note?.location
         detailText.text = note?.content
         
+        // The path is the default path if there has no photo in selected note
         path = "https://firebasestorage.googleapis.com/v0/b/fit5140-week09-labmessag-d81b2.appspot.com/o/PuMp0OF8K1fg7OwO61TtGH3RPUT2%2F1605617833?alt=media&token=9f142c8b-98fe-4d63-b2ee-a14703378322"
         
         if note?.photo?.isEmpty == true {
@@ -42,6 +43,7 @@ class DetailViewController: UIViewController {
         
     }
     
+    // observe keyboard rise up
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
@@ -50,6 +52,7 @@ class DetailViewController: UIViewController {
         }
     }
     
+    // observe keyboard go down
     @objc func keyboardWillHide(_ notification: Notification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
@@ -80,7 +83,7 @@ class DetailViewController: UIViewController {
         return image
     }
     
-    // share button to share image and content of a note
+    // share image and content of a note
     @IBAction func share(_ sender: Any) {
         var activityVC: UIActivityViewController
         if self.note?.photo?.isEmpty == true {
@@ -91,7 +94,7 @@ class DetailViewController: UIViewController {
         self.present(activityVC, animated: true, completion: nil)
     }
     
-    // edit button to edit selected note
+    // edit selected note
     @IBAction func edit(_ sender: Any) {
         if editButton.currentTitle == "Edit" {
             // change button states
@@ -118,17 +121,5 @@ class DetailViewController: UIViewController {
         }
         
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

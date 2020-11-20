@@ -38,8 +38,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        // location
+        // location setting
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         locationManager.distanceFilter = 10
         locationManager.delegate = self
@@ -51,6 +50,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
             }
         }
         
+        // UI setting
         addContent.delegate = self
         addDate.text = currentDate()
         
@@ -63,17 +63,6 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         databaseController = appDelegate.databaseController
     }
     
-    // keyboard methods
-    @objc func keyboardWillShow(_ notification: Notification) {
-        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 310, right: 0.0)
-        self.addContent.contentInset = contentInsets
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0.0,left: 0.0,bottom: 0.0,right: 0.0)
-        self.addContent.contentInset = contentInsets
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         locationManager.startUpdatingLocation()
@@ -82,6 +71,19 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         locationManager.stopUpdatingLocation()
+    }
+    
+    // MARK: - keyboard methods
+    // observe keyboard rise up
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 310, right: 0.0)
+        self.addContent.contentInset = contentInsets
+    }
+    
+    // observe keyboard go down
+    @objc func keyboardWillHide(_ notification: Notification) {
+        let contentInsets:UIEdgeInsets = UIEdgeInsets(top: 0.0,left: 0.0,bottom: 0.0,right: 0.0)
+        self.addContent.contentInset = contentInsets
     }
     
     // hide keyboard when click blank area
@@ -101,6 +103,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
             self.noteLong = location.coordinate.longitude
         }
         
+        // get location name
         let geocoder = CLGeocoder()
         var place:CLPlacemark?
         geocoder.reverseGeocodeLocation(currentLocation, completionHandler: {(placemarks, error) -> Void in
@@ -135,8 +138,6 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         // upload the photo taken or selected by user
         if self.image != nil {
             let img = self.image
-            //let date = UInt(Date().timeIntervalSince1970)
-            //      let filename = "\(date).jpg"
             guard let data = img?.jpegData(compressionQuality: 0.2) else {
                 displayMessage("Image can not be compressed.", "Error")
                 return
@@ -157,12 +158,15 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
                         
                         self.imageRef.document("\(data)").setData(["url":"\(downloadURL)"])
                         self.notePhoto = downloadURL.absoluteString
-                        print(self.notePhoto!)
+                        
+                        // save note with image
+                        print("Image Upload: \(self.notePhoto!)")
                         self.saveNote()
                     }
                 }
             }
         } else {
+            // save note without image
             self.notePhoto = ""
             self.saveNote()
         }
@@ -175,14 +179,6 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         noteDate = addDate.text
         noteLocation = addLocation.text
         noteContent = addContent.text
-        //setPhoto()
-        
-        print(noteDate)
-        print(noteLocation)
-        print(noteLat)
-        print(noteLong)
-        print(notePhoto)
-        print(noteContent)
         
         let _ = databaseController?.addNote(date: noteDate!, location: noteLocation!, lat: noteLat!, long: noteLong!, photo: notePhoto!, content: noteContent!)
     }
@@ -214,7 +210,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
     }
     
     // MARK: - UITextView Delegate
-    
+    // change text view when user editing
     func textViewDidBeginEditing(_ textView: UITextView) {
         let high = textView.frame.height - 330
         let rect = CGRect(origin: textView.frame.origin, size: CGSize(width: textView.frame.width, height: high))
@@ -244,16 +240,5 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

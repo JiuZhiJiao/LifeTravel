@@ -14,6 +14,7 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
     var notes: [Note] = []
     var selectedNote: Note?
     
+    // group notes to sectinos to be suitable for table view
     var sections: [String] = []
     var secNotes: [String: [Note]] = [:]
     
@@ -52,14 +53,16 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
         let header = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 40))
         
         let sectionText = UILabel()
-        sectionText.frame = CGRect.init(x: 5, y: 10, width: header.frame.width-10, height: header.frame.height-10)
-        sectionText.font = .systemFont(ofSize: 14, weight: .bold)
+        sectionText.frame = CGRect.init(x: 5, y: 10, width: header.frame.width-10, height: header.frame.height-13)
+        sectionText.font = .systemFont(ofSize: 16, weight: .bold)
+        sectionText.textColor = .systemGray
         sectionText.text = sections[section]
         
         header.addSubview(sectionText)
         return header
     }
     
+    // set the high of each section's header
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
@@ -93,21 +96,6 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
         }
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailSegue" {
@@ -127,6 +115,7 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
         tableView.reloadData()
     }
     
+    // group all notes to sections
     func setSections() {
         sections.removeAll()
         for note in notes {
