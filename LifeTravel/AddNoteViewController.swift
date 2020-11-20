@@ -180,7 +180,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         noteLocation = addLocation.text
         noteContent = addContent.text
         
-        let _ = databaseController?.addNote(date: noteDate!, location: noteLocation!, lat: noteLat!, long: noteLong!, photo: notePhoto!, content: noteContent!)
+        let _ = databaseController?.addNote(date: noteDate!, location: noteLocation ?? "No Address", lat: noteLat ?? -37.896862, long: noteLong ?? 145.059791, photo: notePhoto!, content: noteContent!)
     }
     
     @IBAction func takePhoto(_ sender: Any) {

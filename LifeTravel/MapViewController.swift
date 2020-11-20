@@ -143,9 +143,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // reset annotations
         self.mapView.removeAnnotations(locationList)
+        for location in locationList {
+            stopMonitoring(location: location)
+        }
         locationList.removeAll()
         setAnnotations()
-        
         print(allNote.count)
     }
 
@@ -165,6 +167,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             mapView.addAnnotation(location)
             //start monitor ~~
             startMonitoring(location: location)
+
+            
         }
     }
     
@@ -187,7 +191,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 circularRegion.identifier == location.title else {
                 continue
             }
-            locationManager.startMonitoring(for: circularRegion)
+            locationManager.stopMonitoring(for: circularRegion)
         }
     }
 

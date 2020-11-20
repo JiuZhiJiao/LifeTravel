@@ -695,7 +695,7 @@
         <!--LifeTravel-->
         <scene sceneID="mJ5-2U-h0W">
             <objects>
-                <tabBarController id="4m8-Du-VaM" customClass="TabBarViewController" customModule="LifeTravel" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBar" id="4m8-Du-VaM" customClass="TabBarViewController" customModule="LifeTravel" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="LifeTravel" id="0rc-nf-J1a">
                         <barButtonItem key="leftBarButtonItem" title="Log out" id="VD8-Y7-hsd">
                             <connections>
