@@ -15,45 +15,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-09-cvW">
-                                <rect key="frame" x="58" y="137" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQO-4R-EWS">
-                                <rect key="frame" x="58" y="186" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1H-mD-MLG">
-                                <rect key="frame" x="53" y="273" width="49" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Upload"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1H-mD-MLG">
+                                <rect key="frame" x="16" y="635" width="343" height="35"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="KMe-Iu-VST"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="Upload">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="uploadNotes:" destination="uhy-ha-ag5" eventType="touchUpInside" id="Cxa-sZ-2rC"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXC-KW-GOU">
-                                <rect key="frame" x="200" y="273" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Download"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EXC-KW-GOU">
+                                <rect key="frame" x="16" y="678" width="343" height="35"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="265-gS-8aH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <state key="normal" title="Download">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="downloadNotes:" destination="uhy-ha-ag5" eventType="touchUpInside" id="oQA-I5-pLJ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="NvR-6l-9HQ" firstAttribute="trailing" secondItem="EXC-KW-GOU" secondAttribute="trailing" constant="16" id="1Jl-8W-1ng"/>
+                            <constraint firstItem="EXC-KW-GOU" firstAttribute="top" secondItem="B1H-mD-MLG" secondAttribute="bottom" constant="8" id="VZy-bW-Hbm"/>
+                            <constraint firstItem="EXC-KW-GOU" firstAttribute="leading" secondItem="NvR-6l-9HQ" secondAttribute="leading" constant="16" id="WRg-IO-YSr"/>
+                            <constraint firstItem="B1H-mD-MLG" firstAttribute="leading" secondItem="NvR-6l-9HQ" secondAttribute="leading" constant="16" id="jZN-h8-FnL"/>
+                            <constraint firstItem="NvR-6l-9HQ" firstAttribute="bottom" secondItem="EXC-KW-GOU" secondAttribute="bottom" constant="16" id="qlp-Ab-TOY"/>
+                            <constraint firstItem="NvR-6l-9HQ" firstAttribute="trailing" secondItem="B1H-mD-MLG" secondAttribute="trailing" constant="16" id="wLw-R1-KlR"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="NvR-6l-9HQ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Cloud" image="icloud" catalog="system" id="h41-nr-YF9"/>
-                    <connections>
-                        <outlet property="infoLabel" destination="KQO-4R-EWS" id="qvJ-73-hyO"/>
-                        <outlet property="userLabel" destination="fjd-09-cvW" id="SPW-ZH-FDm"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lSm-FF-LFy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

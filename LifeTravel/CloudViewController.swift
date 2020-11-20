@@ -11,16 +11,14 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
-class CloudViewController: UIViewController {
-
-    @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var infoLabel: UILabel!
+class CloudViewController: UIViewController, DatabaseListener {
     
     var userReference = Firestore.firestore().collection("users")
     var storageReference = Storage.storage().reference()
     var notesRef : CollectionReference?
     var firebaseListener: ListenerRegistration?
     
+    var localNotes: [Note] = []
     weak var databaseController: DatabaseProtocol?
     
     override func viewDidLoad() {
@@ -33,6 +31,16 @@ class CloudViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
     }
     
     @IBAction func uploadNotes(_ sender: Any) {
@@ -89,7 +97,7 @@ class CloudViewController: UIViewController {
             if let error = error {
                 print(error)
             } else {
-                //delete all notes on the cloud
+                //get all notes on the cloud
                 for doc in querySnapshot!.documents {
                     let content = doc["content"] as! String
                     let date = doc["date"] as! String
@@ -108,6 +116,18 @@ class CloudViewController: UIViewController {
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
     }
+    
+    // MARK: - Database Listener Functions
+    func onNoteListChange(change: DatabaseChange, notes: [Note]) {
+        self.localNotes = notes
+        print("Local notes: -------")
+        print(localNotes.count)
+        print(getLocationNumber(allNotes: localNotes))
+        print(getPhotoNumber(allNotes: localNotes))
+        print("Cloud notes: -------")
+        print(getInfoNumber().locationCount)
+        print("--------------------")
+    }
     /*
     // MARK: - Navigation
 
@@ -117,6 +137,74 @@ class CloudViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - Get Local Notes Informations
+    func getLocationNumber(allNotes: [Note]) -> Int {
+        var locations: [String] = []
+        for note in allNotes {
+            if note.location != "No Address" {
+                locations.append(note.location!)
+            }
+        }
+        
+        // remove duplicate string
+        let removeDup = locations.enumerated().filter {(index,value) -> Bool in
+            return locations.firstIndex(of: value) == index }.map {$0.element}
+        
+        return removeDup.count
+    }
+    
+    func getPhotoNumber(allNotes: [Note]) -> Int {
+        var photos: [String] = []
+        for note in allNotes {
+            if note.photo != "" {
+                photos.append(note.photo!)
+            }
+        }
+        
+        return photos.count
+    }
+    
+    // MARK: - Get Cloud Note Informations
+    func getInfoNumber() -> (noteCount: Int, locationCount: Int, photoCount: Int) {
+        var num = 0
+        
+        guard let userID = Auth.auth().currentUser?.uid else {
+            displayMessage("Cannot download unitl logged in", "Error")
+            return (0,0,0)
+        }
+        // set note reference
+        notesRef = self.userReference.document("\(userID)").collection("notes")
+        notesRef!.getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print(error)
+            } else {
+                //get all notes on the cloud
+                var noteNum: Int = 0
+                var locationNum: Int = 0
+                var photoNum: Int = 0
+                for doc in querySnapshot!.documents {
+                    noteNum += 1
+
+                    let location = doc["location"] as! String
+                    let photo = doc["photo"] as! String
+                    
+                    if location != "No Address" && location != "" {
+                        locationNum += 1                    }
+                    
+                    if photo != "" {
+                        photoNum += 1
+                    }
+                }
+                //return (noteNum, locationNum, photoNum)
+                //self.userLabel.text = String(noteNum)
+                num = noteNum
+            }
+        }
+        
+        return (0,0,0)
+    }
+    
 
     func displayMessage(_ message: String,_ title: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -162,6 +162,9 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
                     }
                 }
             }
+        } else {
+            self.notePhoto = ""
+            self.saveNote()
         }
         
         navigationController?.popViewController(animated: true)
