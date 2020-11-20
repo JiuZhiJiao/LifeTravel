@@ -89,6 +89,7 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
             self.databaseController?.deleteNote(note: notes[indexPath.row])
         }
     }
+    
 
     /*
     // Override to support rearranging the table view.

@@ -12,6 +12,12 @@ import FirebaseFirestore
 import FirebaseStorage
 
 class CloudViewController: UIViewController, DatabaseListener {
+    @IBOutlet weak var localNote: UILabel!
+    @IBOutlet weak var localPhoto: UILabel!
+    @IBOutlet weak var localLocation: UILabel!
+    @IBOutlet weak var cloudNote: UILabel!
+    @IBOutlet weak var cloudPhoto: UILabel!
+    @IBOutlet weak var cloudLocation: UILabel!
     
     var userReference = Firestore.firestore().collection("users")
     var storageReference = Storage.storage().reference()
@@ -25,7 +31,8 @@ class CloudViewController: UIViewController, DatabaseListener {
         super.viewDidLoad()
         
         //let firebase = Firestore.firestore()
-        
+        // set cloud note information
+        getInfoNumber()
         
         // database
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -74,8 +81,12 @@ class CloudViewController: UIViewController, DatabaseListener {
                         "long": note.long
                     ])
                 }
+                
+                // set cloud note information
+                self.getInfoNumber()
             }
         }
+        
         
         let alertController = UIAlertController(title: "Success",
                message: "Your notes have been uploaded!", preferredStyle: .alert)
@@ -120,13 +131,14 @@ class CloudViewController: UIViewController, DatabaseListener {
     // MARK: - Database Listener Functions
     func onNoteListChange(change: DatabaseChange, notes: [Note]) {
         self.localNotes = notes
-        print("Local notes: -------")
-        print(localNotes.count)
-        print(getLocationNumber(allNotes: localNotes))
-        print(getPhotoNumber(allNotes: localNotes))
-        print("Cloud notes: -------")
-        print(getInfoNumber().locationCount)
-        print("--------------------")
+        
+        
+        // set local note information
+        localNote.text = String(localNotes.count)
+        localPhoto.text = String(getPhotoNumber(allNotes: localNotes))
+        localLocation.text = String(getLocationNumber(allNotes: localNotes))
+        
+        
     }
     /*
     // MARK: - Navigation
@@ -166,12 +178,11 @@ class CloudViewController: UIViewController, DatabaseListener {
     }
     
     // MARK: - Get Cloud Note Informations
-    func getInfoNumber() -> (noteCount: Int, locationCount: Int, photoCount: Int) {
-        var num = 0
+    func getInfoNumber() {
         
         guard let userID = Auth.auth().currentUser?.uid else {
             displayMessage("Cannot download unitl logged in", "Error")
-            return (0,0,0)
+            return
         }
         // set note reference
         notesRef = self.userReference.document("\(userID)").collection("notes")
@@ -196,13 +207,22 @@ class CloudViewController: UIViewController, DatabaseListener {
                         photoNum += 1
                     }
                 }
-                //return (noteNum, locationNum, photoNum)
-                //self.userLabel.text = String(noteNum)
-                num = noteNum
+                // set cloud information
+                self.cloudNote.text = String(noteNum)
+                self.cloudPhoto.text = String(photoNum)
+                self.cloudLocation.text = String(locationNum)
             }
         }
         
-        return (0,0,0)
+        return
+    }
+    
+    // get current date
+    func currentDate() -> String {
+        let dateformatter = DateFormatter()
+        dateformatter.dateFormat = "YYYY-MM-dd"
+        let time = dateformatter.string(from: Date())
+        return time
     }
     
 
