@@ -142,8 +142,8 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
                 displayMessage("Image can not be compressed.", "Error")
                 return
             }
-            
-            let imgRef = storageReference.child("images")
+            let date = UInt(Date().timeIntervalSince1970)
+            let imgRef = storageReference.child("images/\(date)")
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpg"
             imgRef.putData(data, metadata: metadata){(meta, error) in
