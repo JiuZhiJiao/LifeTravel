@@ -8,6 +8,8 @@
 
 import UIKit
 import MapKit
+import CoreLocation
+
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, DatabaseListener {
 
@@ -43,9 +45,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         locationManager.delegate = self
         
         let authorisationStatus = CLLocationManager.authorizationStatus()
-        if authorisationStatus != .authorizedWhenInUse {
+        if authorisationStatus != .authorizedAlways {
             if authorisationStatus == .notDetermined {
-                locationManager.requestWhenInUseAuthorization()
+                locationManager.requestAlwaysAuthorization()
             }
         }
         
@@ -68,6 +70,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Center map on user current location
+        self.mapView.setCenter(mapView.userLocation.coordinate, animated: true)
+        
         databaseController?.addListener(listener: self)
         setAnnotations()
         locationManager.startUpdatingLocation()
@@ -158,6 +163,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             let location = LocationAnnotation(note: note)
             locationList.append(location)
             mapView.addAnnotation(location)
+            //start monitor ~~
+            startMonitoring(location: location)
+        }
+    }
+    
+    // MARK: - Geofence
+    
+    func region(with location: LocationAnnotation) -> CLCircularRegion {
+        let region = CLCircularRegion(center: location.coordinate, radius: 100, identifier: location.title!)
+        region.notifyOnEntry = true
+        return region
+    }
+
+    func startMonitoring(location: LocationAnnotation) {
+      let fenceRegion = region(with: location)
+      locationManager.startMonitoring(for: fenceRegion)
+    }
+    
+    func stopMonitoring(location: LocationAnnotation) {
+        for region in locationManager.monitoredRegions {
+            guard let circularRegion = region as? CLCircularRegion,
+                circularRegion.identifier == location.title else {
+                continue
+            }
+            locationManager.startMonitoring(for: circularRegion)
         }
     }
 

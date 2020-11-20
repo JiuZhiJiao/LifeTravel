@@ -8,12 +8,17 @@
 
 import UIKit
 import Firebase
+import CoreLocation
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate, UNUserNotificationCenterDelegate  {
     
     var databaseController: DatabaseProtocol?
-
+    let locationManager = CLLocationManager()
+    var window: UIWindow?
+    
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // set core data
         databaseController = CoreDataController()
@@ -21,6 +26,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // firebase configuration
         FirebaseApp.configure()
+        
+        // geofence
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
+        let options: UNAuthorizationOptions = [.badge, .sound, .alert]
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: options) { success, error in
+                if let error = error{
+                    print(error)
+                } else {
+                    UNUserNotificationCenter.current().delegate = self
+                }
+        }
+        
         return true
     }
 
@@ -37,6 +57,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
+    
+    func handleEvent(for region: CLRegion!) {
+           let notificationContent = UNMutableNotificationContent()
+           notificationContent.body = "this is the body"
+           notificationContent.sound = UNNotificationSound.default
+           notificationContent.badge = UIApplication.shared.applicationIconBadgeNumber + 1 as NSNumber
+           let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+           let request = UNNotificationRequest(identifier: "bgjhgjh", content: notificationContent, trigger: trigger)
+           UNUserNotificationCenter.current().add(request) { error in
+               if let error = error {
+                   print(error)
+               }
+           }
+       }
+       
+       
+       
+       
+       // MARK: - CCLocationManagerDelegate
+       
+       func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+         if region is CLCircularRegion {
+           handleEvent(for: region)
+         }
+       }
+       
+       // MARK: - UNUserNotificationCenterDelegate
+
+       func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+           let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+
+           var viewController = UIViewController()
+           viewController = storyBoard.instantiateViewController(withIdentifier: "mapviewBoard") // user tap notification
+           
+           self.window?.rootViewController = viewController
+           self.window?.makeKeyAndVisible()
+       }
 
 
 }
