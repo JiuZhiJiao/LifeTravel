@@ -29,12 +29,9 @@ class CloudViewController: UIViewController, DatabaseListener {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //let firebase = Firestore.firestore()
         // set cloud note information
         getInfoNumber()
-        
-        // database
+        // database controller
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
 
@@ -52,8 +49,9 @@ class CloudViewController: UIViewController, DatabaseListener {
     
     @IBAction func uploadNotes(_ sender: Any) {
         var localNotes = [Note]()
+        //get all local notes
         localNotes = databaseController?.fetchAllNotes() as! [Note]
-    
+        //set up user
         guard let userID = Auth.auth().currentUser?.uid else {
             displayMessage("Cannot upload unitl logged in", "Error")
             return
@@ -67,6 +65,7 @@ class CloudViewController: UIViewController, DatabaseListener {
             } else {
                 //delete all notes on the cloud
                 for doc in querySnapshot!.documents{
+                    //clean up cloud notes
                     let docId = doc.documentID
                     self.notesRef!.document(docId).delete()
                 }
@@ -87,7 +86,7 @@ class CloudViewController: UIViewController, DatabaseListener {
             }
         }
         
-        
+        // Display message
         let alertController = UIAlertController(title: "Success",
                message: "Your notes have been uploaded!", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -96,8 +95,9 @@ class CloudViewController: UIViewController, DatabaseListener {
     }
     
     @IBAction func downloadNotes(_ sender: Any) {
+        //delete all local notes
         databaseController?.deleteAll()
-        
+        //set up user
         guard let userID = Auth.auth().currentUser?.uid else {
             displayMessage("Cannot download unitl logged in", "Error")
             return
@@ -121,6 +121,7 @@ class CloudViewController: UIViewController, DatabaseListener {
             }
         }
         
+        //display success message
         let alertController = UIAlertController(title: "Success",
                message: "Your notes have been downloaded!", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)

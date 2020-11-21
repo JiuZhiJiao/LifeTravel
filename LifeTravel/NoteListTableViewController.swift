@@ -134,7 +134,6 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
                     filterNotes.append(note)
                 }
             }
-            
             secNotes[section] = filterNotes
         }
     }

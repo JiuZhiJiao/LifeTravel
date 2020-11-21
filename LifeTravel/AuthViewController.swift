@@ -40,6 +40,7 @@ class AuthViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    // Register an account
     @IBAction func registerAccount(_ sender: Any) {
         guard let password = passwordTextField.text else {
             displayErrorMessage("Please enter a password")
@@ -57,6 +58,7 @@ class AuthViewController: UIViewController {
         }
     }
     
+    // Log in an account
     @IBAction func loginToAccount(_ sender: Any) {
         guard let password = passwordTextField.text else {
             displayErrorMessage("Please enter a password")
@@ -74,7 +76,7 @@ class AuthViewController: UIViewController {
         }
     }
     
-    
+    // display message function
     func displayErrorMessage(_ errorMessage: String){
         let alertController = UIAlertController(title: "Error", message: errorMessage,
                                                 preferredStyle: UIAlertController.Style.alert)

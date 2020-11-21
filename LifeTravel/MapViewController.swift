@@ -27,15 +27,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        /*
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.distanceFilter = kCLDistanceFilterNone
-        locationManager.startUpdatingLocation()
-        
-        mapView.showsUserLocation = true
-        */
         
         // set map
         self.mapView.delegate = self
@@ -52,16 +43,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         self.mapView.showsUserLocation = true
-        /*
-        let buttonItem = MKUserTrackingButton(mapView: mapView)
-        buttonItem.layer.backgroundColor = UIColor.white.withAlphaComponent(0.8).cgColor
-        buttonItem.layer.borderColor = UIColor.white.cgColor
-        buttonItem.layer.borderWidth = 1
-        buttonItem.layer.cornerRadius = 5
-        buttonItem.isHidden = false
-        view.addSubview(buttonItem)
-        buttonItem.frame = .init(x: view.frame.width - 50, y: view.frame.height - 60, width: 40, height: 40)
-        */
+        
         
         // set data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -90,22 +72,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             return nil
         }
         
-        
         // set the style of the annotation
         let identifier = "marker"
-        //var markerView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        //if markerView == nil {
-            var markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            let markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             let location = annotation as! LocationAnnotation
            
             //let location = annotation as! LocationAnnotation
             markerView.canShowCallout = true
             markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            
-            print("--------------------------------")
-            print(location.note?.location)
-            print(location.note?.photo)
-            print("--------------------------------")
             
             // add image at the leftCalloutAccessoryView
             let urlString = location.note?.photo
@@ -114,8 +88,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
                 setImage(urlString: urlString!, annoImage: imageView)
                 markerView.leftCalloutAccessoryView = imageView
             }
-            
-        //}
         
         return markerView
     }
@@ -127,14 +99,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // show detail of selected annotation
         selectedNote = annotation.note
         self.performSegue(withIdentifier: "showDetailMapSegue", sender: annotation)
-        /*
-        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        guard let detailVC = storyBoard.instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
-            return
-        }
-        detailVC.note = selectedNote
-        navigationController?.show(detailVC, sender: nil)
-        */
     }
     
     // MARK: - CLLocationManager Delegate
@@ -175,35 +139,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
     
-    // set all annotations
-    func setAnnotations() {
-        for note in allNote {
-            let location = LocationAnnotation(note: note)
-            locationList.append(location)
-            mapView.addAnnotation(location)
-            //start monitor ~~
-            startMonitoring(location: location)
-
-            
-        }
-    }
-    
-    
-    // Download Image by using DispathQueue
-    func setImage(urlString: String, annoImage: UIImageView?) {
-        let url = URL(string: urlString)!
-        
-        let task = URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    annoImage?.image = image
-                }
-            }
-        }
-        task.resume()
-    }
-    
+   
     // MARK: - Geofence
     
     func region(with location: LocationAnnotation) -> CLCircularRegion {
@@ -227,4 +163,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
     }
 
+    //MARK: - Other functions
+    // set all annotations
+       func setAnnotations() {
+           for note in allNote {
+               let location = LocationAnnotation(note: note)
+               locationList.append(location)
+               mapView.addAnnotation(location)
+               //start monitor ~~
+               startMonitoring(location: location)
+           }
+       }
+       
+       // Download Image by using DispathQueue
+       func setImage(urlString: String, annoImage: UIImageView?) {
+           let url = URL(string: urlString)!
+           
+           let task = URLSession.shared.dataTask(with: url) {
+               (data, response, error) in
+               if let data = data, let image = UIImage(data: data) {
+                   DispatchQueue.main.async {
+                       annoImage?.image = image
+                   }
+               }
+           }
+           task.resume()
+       }
+       
 }
