@@ -90,15 +90,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             return nil
         }
         
+        
         // set the style of the annotation
         let identifier = "marker"
         var markerView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if markerView == nil {
             markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            
+            let location = annotation as! LocationAnnotation
+           
             //let location = annotation as! LocationAnnotation
             markerView?.canShowCallout = true
             markerView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            
+            
+            
+            // add image at the leftCalloutAccessoryView
+            let urlString = location.note?.photo
+            if urlString != ""{
+                let imageView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
+                setImage(urlString: urlString!, annoImage: imageView)
+                markerView?.leftCalloutAccessoryView = imageView
+            }
+            
         }
         
         return markerView
@@ -170,6 +183,22 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
             
         }
+    }
+    
+    
+    // Download Image by using DispathQueue
+    func setImage(urlString: String, annoImage: UIImageView?) {
+        let url = URL(string: urlString)!
+        
+        let task = URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    annoImage?.image = image
+                }
+            }
+        }
+        task.resume()
     }
     
     // MARK: - Geofence
