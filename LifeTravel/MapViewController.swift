@@ -93,26 +93,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         // set the style of the annotation
         let identifier = "marker"
-        var markerView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        if markerView == nil {
-            markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        //var markerView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        //if markerView == nil {
+            var markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             let location = annotation as! LocationAnnotation
            
             //let location = annotation as! LocationAnnotation
-            markerView?.canShowCallout = true
-            markerView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            markerView.canShowCallout = true
+            markerView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             
-            
+            print("--------------------------------")
+            print(location.note?.location)
+            print(location.note?.photo)
+            print("--------------------------------")
             
             // add image at the leftCalloutAccessoryView
             let urlString = location.note?.photo
             if urlString != ""{
                 let imageView = UIImageView(frame: CGRect.init(x: 0, y: 0, width: 53, height: 53))
                 setImage(urlString: urlString!, annoImage: imageView)
-                markerView?.leftCalloutAccessoryView = imageView
+                markerView.leftCalloutAccessoryView = imageView
             }
             
-        }
+        //}
         
         return markerView
     }
