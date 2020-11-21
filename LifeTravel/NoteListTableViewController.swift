@@ -116,7 +116,7 @@ class NoteListTableViewController: UITableViewController, DatabaseListener {
         tableView.reloadData()
     }
     
-    // group all notes to sections
+    // group all notes into sections
     func setSections() {
         sections.removeAll()
         for note in notes {

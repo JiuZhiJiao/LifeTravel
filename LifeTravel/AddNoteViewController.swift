@@ -222,10 +222,7 @@ class AddNoteViewController: UIViewController, UITextViewDelegate, CLLocationMan
         addContent.frame = view.frame
     }
     
-    
-    
     // MARK: - Other Methods
-    
     // get current date
     func currentDate() -> String {
         let dateformatter = DateFormatter()
